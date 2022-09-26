@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>读取成功</p>
+    <p>运行耗时:{{ time }}秒</p>
+<table><tr>
+<td><p>处理后的输入图像</p>
+    <img src="data:;base64,{{ img_in}}"></td>
+<td> <p>得到的输出结果 </p>
+    <img src="data:;base64,{{ img_out }}"></td>
+</tr></table>
+    <a href="http://127.0.0.1:5000/app">重新选择</a>
+    <a href="http://127.0.0.1:5000/app">返回首页</a>
+</body>
+</html>
