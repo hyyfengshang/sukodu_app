@@ -59,7 +59,7 @@ def display_blocks(divide_image, m=9, n=9):
 
 
 if __name__ == '__main__':
-    img = cv2.imread(r"../imgs/4.jpg")
+    img = cv2.imread(r"../imgs/1.jpg")
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
     # h, w = imgs.shape[0], imgs.shape[1]

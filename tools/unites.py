@@ -26,6 +26,14 @@ def plot(img):
     plt.close('all')
 
 
+def example_transform(example):
+    for index_row,i in enumerate(example):
+        for index_line,j in enumerate(i):
+            if j == '':
+                example[index_row][index_line] = 0
+    return example
+
+
 if __name__ == '__main__':
     img_path = '../imgs/1.jpg'
     img = cv2.imread(img_path)
