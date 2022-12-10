@@ -71,6 +71,7 @@ def show_result(result):
     img = np.asarray(pil_img)
     return img
 
+
 def RGB_to_Bytes(img):
     img_bytes = BytesIO()
     # 将图片数据存入字节流管道， format可以按照具体文件的格式填写
@@ -79,9 +80,10 @@ def RGB_to_Bytes(img):
     image_bytes = img_bytes.getvalue()
     return image_bytes
 
-def return_img_stream(img,resize=None):
+
+def return_img_stream(img, resize=None):
     if resize:
-        img = cv2.resize(img,resize)
+        img = cv2.resize(img, resize)
     img_bytes = numpy2byte(img)
     img_stream = base64.b64encode(img_bytes).decode()
     return img_stream
@@ -97,5 +99,3 @@ if __name__ == '__main__':
     # print(img)
     img = cv2.imread(img_path)
     bytes_img = RGB_to_Bytes(img)
-
-

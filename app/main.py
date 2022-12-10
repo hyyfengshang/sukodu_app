@@ -35,7 +35,7 @@ def allowed_file(filename):
 
 
 # 上传文件
-@app.route('/up_photo', methods=['POST'], strict_slashes=False)
+@app.route('/get_result', methods=['POST'], strict_slashes=False)
 def api_upload():
     t1 = time.time()
     data_file = request.files['photo']
@@ -49,15 +49,17 @@ def api_upload():
         if detect == 1:
             cut_imgs = img_cut.img_cut(detect_img)
             pred = num_model.inference(cut_imgs)
+            # result_in = show_result(pred)
+            # result_in = return_img_stream(result_in, SIZE)
             sudo = Sudoku(pred)
             result, msg = sudo.get_result()
             if msg is False:
-                return render_template('error_request.html', img_in=img_in, error="图片不符合解密要求")
+                return render_template('error_request.html', img_in=img_in, error="此数独无解")
             img_result = show_result(result)
             img_out = img_detect.img_detect(img_result)
-            img_out = return_img_stream(img_out, SIZE)
+            result_out = return_img_stream(img_out, SIZE)
             t2 = time.time()
-            return render_template('show_result.html', img_in=img_in, img_out=img_out, time=str(t2 - t1))
+            return render_template('show_result.html', img_in=img_in, result_out=result_out, time=str(t2 - t1))
         else:
             return render_template('error_request.html', img_in=img_in, error="图片不符合解密要求")
     else:
