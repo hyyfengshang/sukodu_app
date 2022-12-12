@@ -1,6 +1,7 @@
 import os
 import time
 
+import tensorflow as tf
 import numpy as np
 import utils
 import cv2
@@ -8,14 +9,16 @@ from tensorflow.keras import backend as K
 from model.VGG16 import VGG16
 
 K.set_image_data_format('channels_last')
-
+model_path = "../logs/best_nums.h5"
+img_path = '../datasets/sudoku_nums'
 
 if __name__ == "__main__":
-    os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+    # os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-    model = VGG16(2)
-    model.load_weights("../logs/20220926_img.h5")
-    img_path = '../datasets/sudoku_img'
+
+    # os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+    # tf.device('/ cpu :0')
+    model = tf.keras.models.load_model(model_path)
     label_files = os.listdir(img_path)
     for label_file in label_files:
         label_file_path = os.path.join(img_path,label_file)
@@ -31,7 +34,7 @@ if __name__ == "__main__":
             t1 = time.time()
             out = model.predict(img)
             t2 = time.time()
-            print("weight_cost:%.4f" % (t2 - t1))
+            print("tf_model_cost: %.4f" %(t2-t1))
             result = np.argmax(out)
             print(result)
             if result != int(label_file):

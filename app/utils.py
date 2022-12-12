@@ -8,12 +8,13 @@ import numpy as np
 from PIL import Image
 import cv2
 from tools.img_into import numpy2byte
+from model.utils import resize_image
 
 
 class ErrorMsg(Enum):
     ILLEGAL_INPUT = (101, "非法的输入")
     ILLEGAL_INPUT_SIZE = (102, "非法的图片大小")
-    NO_CATTLE_DETECT = (103, "未检测到牛")
+    NO_CATTLE_DETECT = (103, "图片输入不符合要求")
     INVALID_TOKEN = (104, "非法的token")
 
 
@@ -87,6 +88,13 @@ def return_img_stream(img, resize=None):
     img_bytes = numpy2byte(img)
     img_stream = base64.b64encode(img_bytes).decode()
     return img_stream
+
+
+def post_process(img):
+    img = img / 255
+    img = np.expand_dims(img, axis=0)
+    img = resize_image(img, (224, 224))
+    return img
 
 
 if __name__ == '__main__':

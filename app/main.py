@@ -10,13 +10,16 @@ from PIL import Image
 from tools.sudoku_decrypt import Sudoku
 from tools import img_detect, img_cut
 import time
+from cfg import MODEL_TYPE, DEVICE, IMG_MODEL_PATH, NUMS_MODEL_PATH
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = DEVICE
 
 sys.path.append(".")
 sys.path.append("..")
 app = Flask(__name__)
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'JPG', 'PNG', 'gif', 'GIF'])
-detect_model = ImgDetect("../logs/20220926_img.h5", 2)
-num_model = NumDetect("../logs/20220925_nums.h5", 10)
+detect_model = ImgDetect(MODEL_TYPE, IMG_MODEL_PATH, 2)
+num_model = NumDetect(MODEL_TYPE, NUMS_MODEL_PATH, 10)
 SIZE = (640, 640)
 
 
