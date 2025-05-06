@@ -23,10 +23,10 @@ def img_cut(img, m=9, n=9):  # 分割成m行n列
     # 图像缩放
     img_re = cv2.resize(img, (w, h),
                         cv2.INTER_LINEAR)  # 也可以用img_re=skimage.transform.resize(imgs, (h,w)).astype(np.uint8)
-    # plt.imshow(img_re)
+    plt.imshow(img_re)
     gx, gy = np.meshgrid(np.linspace(0, w, n), np.linspace(0, h, m))
-    gx = gx.astype(np.int)
-    gy = gy.astype(np.int)
+    gx = gx.astype(np.int16)
+    gy = gy.astype(np.int16)
 
     divide_image = np.zeros([m - 1, n - 1, grid_h, grid_w, 3],
                             np.uint8)  # 这是一个五维的张量，前面两维表示分块后图像的位置（第m行，第n列），后面三维表示每个分块后的图像信息
