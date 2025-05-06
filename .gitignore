@@ -2,4 +2,6 @@ datasets/
 imgs/
 logs/
 .idea/
-app/
+tools/__pycache__/
+model/__pycache__/
+app/__pycache__
